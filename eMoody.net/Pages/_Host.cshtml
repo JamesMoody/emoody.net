@@ -1,0 +1,40 @@
+﻿@page "/"
+@namespace eMoody.net.Pages
+@addTagHelper *, Microsoft.AspNetCore.Mvc.TagHelpers
+@{
+    Layout = null;
+}
+
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="utf-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>eMoody.net</title>
+    <base href="~/" />
+    <link rel="stylesheet" href="css/bootstrap/bootstrap.min.css" />
+    <link href="css/site.css" rel="stylesheet" />
+</head>
+<body>
+
+    <div class="backdrop"><canvas id="activebackdrop"></canvas></div>
+
+    <app>
+        <component type="typeof(App)" render-mode="ServerPrerendered" />
+    </app>
+
+    <div id="blazor-error-ui">
+        <environment include="Staging,Production">
+            An error has occurred. This application may no longer respond until <a href="/" class="reload">reloaded</a>.
+        </environment>
+        <environment include="Development">
+            An unhandled exception has occurred. See browser dev tools for details. <a href="/" class="reload">Reload</a>
+        </environment>        
+        <a class="dismiss">🗙</a>
+    </div>
+
+    <script src="_framework/blazor.server.js"></script>
+    <script src="/lib/mainloop.js/build/mainloop.min.js"></script>
+    <script src="/js/starfield.js"></script>
+</body>
+</html>

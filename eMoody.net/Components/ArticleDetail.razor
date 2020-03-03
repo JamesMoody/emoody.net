@@ -1,0 +1,17 @@
+﻿@using eMoody.DAO;
+@using eMoody.Infrastructure.DataModels;
+@using eMoody.net.Components;
+
+<MarkdownViewer Content="@SelectedArticle.Content"></MarkdownViewer>
+<p>- @SelectedArticle.Author</p>
+
+@code {
+
+    #region params - selectedArticle
+
+    [Parameter]
+    public Article SelectedArticle { get; set; } = null;
+
+    #endregion
+
+}

@@ -1,0 +1,14 @@
+{
+  "version": "1.0",
+  "defaultProvider": "jsdelivr",
+  "libraries": [
+    {
+      "library": "mainloop.js@1.0.4",
+      "destination": "wwwroot/lib/mainloop.js/",
+      "files": [
+        "build/mainloop.min.js",
+        "build/mainloop.min.js.map"
+      ]
+    }
+  ]
+}

@@ -1,0 +1,86 @@
+﻿@page "/writing"
+@using eMoody.DAO;
+@using eMoody.Infrastructure.DataModels;
+@using eMoody.net.Components;
+
+<div class="row">
+
+    <div class="col-md-3 col-lg-2" style="margin-bottom: 10px;">
+        <div class="card card-color">
+            <h5 class="card-title">Articles</h5>
+            <div class="card-body">
+                <FancyList TemplateType="Article" Items="@Articles" onOptionClicked="showArticleDetail">
+                    <Option>
+                        @context.Title
+                    </Option>
+                </FancyList>
+            </div>
+        </div>
+    </div>
+
+    @if (hasArticleSelected) { 
+        <div class="col-md-9 col-lg-10">
+            <div class="card card-color">
+                <h5 class="card-title">"@selectedArticle.Title"</h5>
+                <div class="card-body">
+                    <ArticleDetail @ref="articleDetail"
+                                   SelectedArticle="selectedArticle"
+                                   >
+                    </ArticleDetail>
+                </div>
+            </div>
+        </div>
+    }
+
+</div>
+
+@code {
+
+    #region locals et al
+
+    protected IReadOnlyList<Article> Articles        = null;
+    protected Article                selectedArticle = null;
+    protected ArticleDetail          articleDetail   = null;
+
+    #endregion
+
+    #region overrides - OnInitialized
+
+    protected override void OnInitialized()
+    {
+        //try {
+        DataAccess dao = new DataAccess();
+
+        using (var db = dao.Writing) {
+            Articles = db.listArticles()
+                         .ToArray();
+        }
+
+        // } catch (Exception ex) {
+        //     // todo
+        // }
+    }
+
+    #endregion
+
+    #region properties - hasArticleSelected
+
+    protected bool hasArticleSelected {
+        get {
+            return (selectedArticle != null);
+        }
+    }
+
+    #endregion
+
+    #region event targets - showArticleDetail
+
+    protected void showArticleDetail(Article item) {
+        selectedArticle = item;
+    }
+
+
+    #endregion 
+
+
+}
