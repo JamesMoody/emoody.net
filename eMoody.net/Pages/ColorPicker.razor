@@ -1,0 +1,279 @@
+﻿@page "/colors"
+@using eMoody.DAO;
+@using eMoody.Infrastructure.DataModels;
+@using eMoody.net.Components;
+
+<div class="row">
+
+    <div class="col-sm-6">
+        <div class="row float-sm-right">
+            <div class="col-md-12">
+                <div class="color-box" style="@boxStyle"></div>
+            </div>
+            <div class="col-md-12">
+                <div class="input-group bump-top">
+                    <div class="input-group-prepend">
+                        <span class="input-group-text">hex</span>
+                    </div>
+                    <input type="text" class="form-control" id="hexColor" @bind-value="@hexColor" />
+                </div>
+                <div class="input-group">
+                    <div class="input-group-prepend">
+                        <span class="input-group-text">rgba</span>
+                    </div>
+                    <input type="text" class="form-control" id="rgbaColor" @bind-value="@rgbaColor" />
+                </div>
+            </div>
+        </div>
+    </div>
+
+    <div class="col-sm-6">
+        <div class="row">
+            <div class="col-sm">
+                <div class="form-group color-range-alignments">
+                    <input type="range" class="form-control-range range-red-gradient" style="@redRangeStyle" id="redRange" min="0" max="255" @bind-value="@redColorValue" />
+                </div>
+            </div>
+            <div class="col-sm">
+                <input type="text" class="form-control" id="redDecimal" @bind-value="@redColorValue" maxlength="3" />
+            </div>
+            <div class="col-sm">
+                <input type="text" class="form-control" id="redHex" @bind-value="@redColorHex" maxlength="2" />
+            </div>
+        </div>
+        <div class="row">
+            <div class="col-sm">
+                <div class="form-group color-range-alignments">
+                    <input type="range" class="form-control-range range-green-gradient" style="@greenRangeStyle" id="greenRange" min="0" max="255" @bind-value="@greenColorValue" />
+                </div>
+            </div>
+            <div class="col-sm">
+                <input type="text" class="form-control" id="greenDecimal" @bind-value="@greenColorValue" maxlength="3" />
+            </div>
+            <div class="col-sm">
+                <input type="text" class="form-control" id="greenHex" @bind-value="@greenColorHex" maxlength="2" />
+            </div>
+        </div>
+        <div class="row">
+            <div class="col-sm">
+                <div class="form-group color-range-alignments">
+                    <input type="range" class="form-control-range range-blue-gradient" style="@blueRangeStyle" id="blueRange" min="0" max="255" @bind-value="@blueColorValue" />
+                </div>
+            </div>
+            <div class="col-sm">
+                <input type="text" class="form-control" id="blueDecimal" @bind-value="@blueColorValue" maxlength="3" />
+            </div>
+            <div class="col-sm">
+                <input type="text" class="form-control" id="blueHex" @bind-value="@blueColorHex" maxlength="2" />
+            </div>
+        </div>
+        <div class="row">
+            <div class="col-sm-4">
+                <div class="form-group color-range-alignments">
+                    <input type="range" class="form-control-range range-alpha-gradient" style="@alphaRangeStyle" id="alphaRange" min="0.00" max="1.00" step="0.01" @bind-value="@alphaColorValue" />
+                </div>
+            </div>
+            <div class="col-sm-4">
+                <input type="text" class="form-control" id="alphaDecimal" @bind-value="@alphaColorValue" maxlength="4" />
+            </div>
+        </div>
+
+    </div>
+
+</div>
+
+@code {
+
+    #region locals and such...
+
+    private int redDec   = 110;
+    private int greenDec = 153;
+    private int blueDec  = 51;
+    private decimal alphaDec = 0.50M;
+
+    #endregion
+
+    #region values - red decimal color
+
+    public int redColorValue {
+        get {
+            return redDec;
+        }
+        set {
+            redDec = value;
+        }
+    }
+
+    #endregion
+    #region values - green decimal color
+
+    public int greenColorValue {
+        get {
+            return greenDec;
+        }
+        set {
+            greenDec = value;
+        }
+    }
+
+    #endregion
+    #region values - blue decimal color
+
+    public int blueColorValue  {
+        get {
+            return blueDec;
+        }
+        set {
+            blueDec = value;
+        }
+    }
+
+    #endregion
+    #region values - alpha decimal color
+
+    public decimal alphaColorValue {
+        get {
+            return alphaDec;
+        }
+        set {
+            alphaDec = value;
+        }
+    }
+
+    #endregion
+    #region values - red hex color
+
+    public string redColorHex {
+        get {
+            return redDec.ToString("X2");
+        }
+        set {
+            redDec = int.Parse(value, System.Globalization.NumberStyles.HexNumber);
+        }
+    }
+
+    #endregion
+    #region values - green hex color
+
+    public string greenColorHex {
+        get {
+            return greenDec.ToString("X2");
+        }
+        set {
+            greenDec = int.Parse(value, System.Globalization.NumberStyles.HexNumber);
+        }
+    }
+
+    #endregion
+    #region values - blue hex color
+
+    public string blueColorHex {
+        get {
+            return blueDec.ToString("X2");
+        }
+        set {
+            blueDec = int.Parse(value, System.Globalization.NumberStyles.HexNumber);
+        }
+    }
+
+    #endregion
+
+    #region output - html hex color 
+
+    public string hexColor {
+        get {
+            return string.Format("#{0}{1}{2}", redColorHex, greenColorHex, blueColorHex);
+        }
+        set {
+            throw new NotImplementedException();
+        }
+    }
+
+    #endregion
+    #region output - html rgba color
+
+    public string rgbaColor {
+        get {
+            return string.Format("rgba({0},{1},{2},{3})", redColorValue, greenColorValue, blueColorValue, alphaColorValue);
+        }
+        set {
+            throw new NotImplementedException();
+        }
+    }
+    
+    #endregion
+
+    #region styles - color box
+
+    public string boxStyle {
+        get {
+            return string.Format("background-color: {0}", rgbaColor);
+        }
+    }
+
+    #endregion
+    #region styles - red range
+
+    private const string format_RedRangeStyle = 
+    @"background-image: -webkit-linear-gradient( to right, rgba(0,0,0,{0}), rgba(255,0,0,{0}) ) !important;
+      background-image:    -moz-linear-gradient( to right, rgba(0,0,0,{0}), rgba(255,0,0,{0}) ) !important;
+      background-image:     -ms-linear-gradient( to right, rgba(0,0,0,{0}), rgba(255,0,0,{0}) ) !important;
+      background-image:      -o-linear-gradient( to right, rgba(0,0,0,{0}), rgba(255,0,0,{0}) ) !important;
+      background-image:         linear-gradient( to right, rgba(0,0,0,{0}), rgba(255,0,0,{0}) ) !important;";
+
+    public string redRangeStyle {
+        get {
+            return string.Format(format_RedRangeStyle, alphaColorValue);
+        }
+    }
+
+    #endregion
+    #region styles - green range
+
+    private const string format_GreenRangeStyle = 
+    @"background-image: -webkit-linear-gradient( to right, rgba(0,0,0,{0}), rgba(0,0,255,{0}) ) !important;
+      background-image:    -moz-linear-gradient( to right, rgba(0,0,0,{0}), rgba(0,0,255,{0}) ) !important;
+      background-image:     -ms-linear-gradient( to right, rgba(0,0,0,{0}), rgba(0,0,255,{0}) ) !important;
+      background-image:      -o-linear-gradient( to right, rgba(0,0,0,{0}), rgba(0,0,255,{0}) ) !important;
+      background-image:         linear-gradient( to right, rgba(0,0,0,{0}), rgba(0,0,255,{0}) ) !important;";
+
+    public string greenRangeStyle {
+        get {
+            return string.Format(format_GreenRangeStyle, alphaColorValue);
+        }
+    }
+
+    #endregion
+    #region styles - blue range
+
+    private const string format_BlueRangeStyle = 
+    @"background-image: -webkit-linear-gradient( to right, rgba(0,0,0,{0}), rgba(0,255,0,{0}) ) !important;
+      background-image:    -moz-linear-gradient( to right, rgba(0,0,0,{0}), rgba(0,255,0,{0}) ) !important;
+      background-image:     -ms-linear-gradient( to right, rgba(0,0,0,{0}), rgba(0,255,0,{0}) ) !important;
+      background-image:      -o-linear-gradient( to right, rgba(0,0,0,{0}), rgba(0,255,0,{0}) ) !important;
+      background-image:         linear-gradient( to right, rgba(0,0,0,{0}), rgba(0,255,0,{0}) ) !important;";
+
+    public string blueRangeStyle {
+        get {
+            return string.Format(format_BlueRangeStyle, alphaColorValue);
+        }
+    }
+
+    #endregion
+    #region styles - alpha range
+
+    private const string format_AlphaRangeStyle = 
+    @"background-image: -webkit-linear-gradient( to right, rgba({0},{1},{2},0), rgba({0},{1},{2},1) ) !important;
+      background-image:    -moz-linear-gradient( to right, rgba({0},{1},{2},0), rgba({0},{1},{2},1) ) !important;
+      background-image:     -ms-linear-gradient( to right, rgba({0},{1},{2},0), rgba({0},{1},{2},1) ) !important;
+      background-image:      -o-linear-gradient( to right, rgba({0},{1},{2},0), rgba({0},{1},{2},1) ) !important;
+      background-image:         linear-gradient( to right, rgba({0},{1},{2},0), rgba({0},{1},{2},1) ) !important;";
+
+    public string alphaRangeStyle {
+        get {
+            return string.Format(format_AlphaRangeStyle, redColorValue, greenColorValue, blueColorValue);
+        }
+    }
+
+    #endregion
+}
