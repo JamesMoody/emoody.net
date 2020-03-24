@@ -422,30 +422,32 @@ a.nav-link.active {
     margin-bottom: 10px;
 }
 
-/* Small devices, 576px and up */
+/*
+/ * Small devices, 576px and up * /
 @media (min-width: 576px) {
     .color-range-alignments {
         margin-top: 15px;
     }
 }
 
-/* Medium devices, 768px and up */
+/ * Medium devices, 768px and up * /
 @media (min-width: 768px) {
     .color-range-alignments {
         margin-top: 15px;
     }
 }
 
-/* Large devices, 992px and up */
+/ * Large devices, 992px and up * /
 @media (min-width: 992px) {
     .color-range-alignments {
         margin-top: 15px;
     }
 }
 
-/* Extra large devices, 1200px and up */
+/ * Extra large devices, 1200px and up * /
 @media (min-width: 1200px) {
     .color-range-alignments {
         margin-top: 15px;
     }
 }
+*/

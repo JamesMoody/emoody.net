@@ -5,8 +5,8 @@
 
 <div class="row">
 
-    <div class="col-sm-6">
-        <div class="row float-sm-right">
+    <div class="col-sm-12">
+        <div class="container">
             <div class="col-md-12">
                 <div class="color-box" style="@boxStyle"></div>
             </div>
@@ -27,54 +27,61 @@
         </div>
     </div>
 
-    <div class="col-sm-6">
-        <div class="row">
-            <div class="col-sm">
+    <div class="col-sm-12">
+
+        <div class="container">
+            <div class="offset-sm-1 col-sm-10">
                 <div class="form-group color-range-alignments">
-                    <input type="range" class="form-control-range range-red-gradient" style="@redRangeStyle" id="redRange" min="0" max="255" @bind-value="@redColorValue" />
+                    <input type="range" class="form-control-range range-red-gradient" style="@redRangeStyle" id="redRange" min="0" max="255" @bind-value="@redColorValue" @bind-value:event="oninput" />
                 </div>
-            </div>
-            <div class="col-sm">
-                <input type="text" class="form-control" id="redDecimal" @bind-value="@redColorValue" maxlength="3" />
-            </div>
-            <div class="col-sm">
-                <input type="text" class="form-control" id="redHex" @bind-value="@redColorHex" maxlength="2" />
+                <div class="input-group">
+                    <input type="text" class="form-control" id="redDecimal" @bind-value="@redColorValue" @bind-value:event="oninput" maxlength="3" />
+                    <div class="input-group-prepend">
+                        <span class="input-group-text">dec || hex</span>
+                    </div>
+                    <input type="text" class="form-control" id="redHex" @bind-value="@redColorHex" @bind-value:event="oninput" maxlength="2" />
+                </div>
             </div>
         </div>
-        <div class="row">
-            <div class="col-sm">
+        <div class="container">
+            <div class="offset-sm-1 col-sm-10">
                 <div class="form-group color-range-alignments">
-                    <input type="range" class="form-control-range range-green-gradient" style="@greenRangeStyle" id="greenRange" min="0" max="255" @bind-value="@greenColorValue" />
+                    <input type="range" class="form-control-range range-green-gradient" style="@greenRangeStyle" id="greenRange" min="0" max="255" @bind-value="@greenColorValue" @bind-value:event="oninput" />
                 </div>
-            </div>
-            <div class="col-sm">
-                <input type="text" class="form-control" id="greenDecimal" @bind-value="@greenColorValue" maxlength="3" />
-            </div>
-            <div class="col-sm">
-                <input type="text" class="form-control" id="greenHex" @bind-value="@greenColorHex" maxlength="2" />
+                <div class="input-group">
+                    <input type="text" class="form-control" id="greenDecimal" @bind-value="@greenColorValue" @bind-value:event="oninput" maxlength="3" />
+                    <div class="input-group-prepend">
+                        <span class="input-group-text">dec || hex</span>
+                    </div>
+                    <input type="text" class="form-control" id="greenHex" @bind-value="@greenColorHex" @bind-value:event="oninput" maxlength="2" />
+                </div>
             </div>
         </div>
-        <div class="row">
-            <div class="col-sm">
+        <div class="container">
+            <div class="offset-sm-1 col-sm-10">
                 <div class="form-group color-range-alignments">
-                    <input type="range" class="form-control-range range-blue-gradient" style="@blueRangeStyle" id="blueRange" min="0" max="255" @bind-value="@blueColorValue" />
+                    <input type="range" class="form-control-range range-blue-gradient" style="@blueRangeStyle" id="blueRange" min="0" max="255" @bind-value="@blueColorValue" @bind-value:event="oninput" />
                 </div>
-            </div>
-            <div class="col-sm">
-                <input type="text" class="form-control" id="blueDecimal" @bind-value="@blueColorValue" maxlength="3" />
-            </div>
-            <div class="col-sm">
-                <input type="text" class="form-control" id="blueHex" @bind-value="@blueColorHex" maxlength="2" />
+                <div class="input-group">
+                    <input type="text" class="form-control" id="blueDecimal" @bind-value="@blueColorValue" @bind-value:event="oninput" maxlength="3" />
+                    <div class="input-group-prepend">
+                        <span class="input-group-text">dec || hex</span>
+                    </div>
+                    <input type="text" class="form-control" id="blueHex" @bind-value="@blueColorHex" @bind-value:event="oninput" maxlength="2" />
+                </div>
             </div>
         </div>
-        <div class="row">
-            <div class="col-sm-4">
+        <div class="container">
+            <div class="offset-sm-1 col-sm-10">
                 <div class="form-group color-range-alignments">
-                    <input type="range" class="form-control-range range-alpha-gradient" style="@alphaRangeStyle" id="alphaRange" min="0.00" max="1.00" step="0.01" @bind-value="@alphaColorValue" />
+                    <input type="range" class="form-control-range range-alpha-gradient" style="@alphaRangeStyle" id="alphaRange" min="0.00" max="1.00" step="0.01" @bind-value="@alphaColorValue" @bind-value:event="oninput" />
                 </div>
-            </div>
-            <div class="col-sm-4">
-                <input type="text" class="form-control" id="alphaDecimal" @bind-value="@alphaColorValue" maxlength="4" />
+                <div class="input-group">
+                    <div class="input-group-prepend">
+                        <span class="input-group-text">alpha</span>
+                    </div>
+                    <input type="text" class="form-control" id="alphaDecimal" @bind-value="@alphaColorValue" @bind-value:event="oninput" maxlength="4" />
+                </div>
             </div>
         </div>
 
