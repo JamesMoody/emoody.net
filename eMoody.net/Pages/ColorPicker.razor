@@ -15,13 +15,13 @@
                     <div class="input-group-prepend">
                         <span class="input-group-text">hex</span>
                     </div>
-                    <input type="text" class="form-control" id="hexColor" @bind-value="@hexColor" />
+                    <input type="text" class="form-control" id="hexColor" @bind-value="@hexColor" readonly="readonly" />
                 </div>
                 <div class="input-group">
                     <div class="input-group-prepend">
                         <span class="input-group-text">rgba</span>
                     </div>
-                    <input type="text" class="form-control" id="rgbaColor" @bind-value="@rgbaColor" />
+                    <input type="text" class="form-control" id="rgbaColor" @bind-value="@rgbaColor" readonly="readonly" />
                 </div>
             </div>
         </div>
@@ -93,9 +93,9 @@
 
     #region locals and such...
 
-    private int redDec   = 110;
-    private int greenDec = 153;
-    private int blueDec  = 51;
+    private int     redDec   = 110;
+    private int     greenDec = 153;
+    private int     blueDec  = 51;
     private decimal alphaDec = 0.50M;
 
     #endregion
@@ -126,11 +126,11 @@
     #endregion
     #region values - blue decimal color
 
-    public int blueColorValue  {
+    public int blueColorValue {
         get {
             return blueDec;
         }
-        set {
+        set         {
             blueDec = value;
         }
     }
@@ -155,7 +155,7 @@
             return redDec.ToString("X2");
         }
         set {
-            redDec = int.Parse(value, System.Globalization.NumberStyles.HexNumber);
+            redDec = ParseHex(value);
         }
     }
 
@@ -167,7 +167,7 @@
             return greenDec.ToString("X2");
         }
         set {
-            greenDec = int.Parse(value, System.Globalization.NumberStyles.HexNumber);
+            greenDec = ParseHex(value);
         }
     }
 
@@ -179,13 +179,13 @@
             return blueDec.ToString("X2");
         }
         set {
-            blueDec = int.Parse(value, System.Globalization.NumberStyles.HexNumber);
+            blueDec = ParseHex(value);
         }
     }
 
     #endregion
 
-    #region output - html hex color 
+    #region output - html hex color
 
     public string hexColor {
         get {
@@ -207,7 +207,7 @@
             throw new NotImplementedException();
         }
     }
-    
+
     #endregion
 
     #region styles - color box
@@ -221,12 +221,12 @@
     #endregion
     #region styles - red range
 
-    private const string format_RedRangeStyle = 
+    private const string format_RedRangeStyle =
     @"background-image: -webkit-linear-gradient( to right, rgba(0,0,0,{0}), rgba(255,0,0,{0}) ) !important;
-      background-image:    -moz-linear-gradient( to right, rgba(0,0,0,{0}), rgba(255,0,0,{0}) ) !important;
-      background-image:     -ms-linear-gradient( to right, rgba(0,0,0,{0}), rgba(255,0,0,{0}) ) !important;
-      background-image:      -o-linear-gradient( to right, rgba(0,0,0,{0}), rgba(255,0,0,{0}) ) !important;
-      background-image:         linear-gradient( to right, rgba(0,0,0,{0}), rgba(255,0,0,{0}) ) !important;";
+  background-image:    -moz-linear-gradient( to right, rgba(0,0,0,{0}), rgba(255,0,0,{0}) ) !important;
+  background-image:     -ms-linear-gradient( to right, rgba(0,0,0,{0}), rgba(255,0,0,{0}) ) !important;
+  background-image:      -o-linear-gradient( to right, rgba(0,0,0,{0}), rgba(255,0,0,{0}) ) !important;
+  background-image:         linear-gradient( to right, rgba(0,0,0,{0}), rgba(255,0,0,{0}) ) !important;";
 
     public string redRangeStyle {
         get {
@@ -237,12 +237,12 @@
     #endregion
     #region styles - green range
 
-    private const string format_GreenRangeStyle = 
+    private const string format_GreenRangeStyle =
     @"background-image: -webkit-linear-gradient( to right, rgba(0,0,0,{0}), rgba(0,255,0,{0}) ) !important;
-      background-image:    -moz-linear-gradient( to right, rgba(0,0,0,{0}), rgba(0,255,0,{0}) ) !important;
-      background-image:     -ms-linear-gradient( to right, rgba(0,0,0,{0}), rgba(0,255,0,{0}) ) !important;
-      background-image:      -o-linear-gradient( to right, rgba(0,0,0,{0}), rgba(0,255,0,{0}) ) !important;
-      background-image:         linear-gradient( to right, rgba(0,0,0,{0}), rgba(0,255,0,{0}) ) !important;";
+  background-image:    -moz-linear-gradient( to right, rgba(0,0,0,{0}), rgba(0,255,0,{0}) ) !important;
+  background-image:     -ms-linear-gradient( to right, rgba(0,0,0,{0}), rgba(0,255,0,{0}) ) !important;
+  background-image:      -o-linear-gradient( to right, rgba(0,0,0,{0}), rgba(0,255,0,{0}) ) !important;
+  background-image:         linear-gradient( to right, rgba(0,0,0,{0}), rgba(0,255,0,{0}) ) !important;";
 
     public string greenRangeStyle {
         get {
@@ -253,12 +253,12 @@
     #endregion
     #region styles - blue range
 
-    private const string format_BlueRangeStyle = 
+    private const string format_BlueRangeStyle =
     @"background-image: -webkit-linear-gradient( to right, rgba(0,0,0,{0}), rgba(0,0,255,{0}) ) !important;
-      background-image:    -moz-linear-gradient( to right, rgba(0,0,0,{0}), rgba(0,0,255,{0}) ) !important;
-      background-image:     -ms-linear-gradient( to right, rgba(0,0,0,{0}), rgba(0,0,255,{0}) ) !important;
-      background-image:      -o-linear-gradient( to right, rgba(0,0,0,{0}), rgba(0,0,255,{0}) ) !important;
-      background-image:         linear-gradient( to right, rgba(0,0,0,{0}), rgba(0,0,255,{0}) ) !important;";
+  background-image:    -moz-linear-gradient( to right, rgba(0,0,0,{0}), rgba(0,0,255,{0}) ) !important;
+  background-image:     -ms-linear-gradient( to right, rgba(0,0,0,{0}), rgba(0,0,255,{0}) ) !important;
+  background-image:      -o-linear-gradient( to right, rgba(0,0,0,{0}), rgba(0,0,255,{0}) ) !important;
+  background-image:         linear-gradient( to right, rgba(0,0,0,{0}), rgba(0,0,255,{0}) ) !important;";
 
     public string blueRangeStyle {
         get {
@@ -269,16 +269,29 @@
     #endregion
     #region styles - alpha range
 
-    private const string format_AlphaRangeStyle = 
+    private const string format_AlphaRangeStyle =
     @"background-image: -webkit-linear-gradient( to right, rgba({0},{1},{2},0), rgba({0},{1},{2},1) ) !important;
-      background-image:    -moz-linear-gradient( to right, rgba({0},{1},{2},0), rgba({0},{1},{2},1) ) !important;
-      background-image:     -ms-linear-gradient( to right, rgba({0},{1},{2},0), rgba({0},{1},{2},1) ) !important;
-      background-image:      -o-linear-gradient( to right, rgba({0},{1},{2},0), rgba({0},{1},{2},1) ) !important;
-      background-image:         linear-gradient( to right, rgba({0},{1},{2},0), rgba({0},{1},{2},1) ) !important;";
+  background-image:    -moz-linear-gradient( to right, rgba({0},{1},{2},0), rgba({0},{1},{2},1) ) !important;
+  background-image:     -ms-linear-gradient( to right, rgba({0},{1},{2},0), rgba({0},{1},{2},1) ) !important;
+  background-image:      -o-linear-gradient( to right, rgba({0},{1},{2},0), rgba({0},{1},{2},1) ) !important;
+  background-image:         linear-gradient( to right, rgba({0},{1},{2},0), rgba({0},{1},{2},1) ) !important;";
 
     public string alphaRangeStyle {
         get {
             return string.Format(format_AlphaRangeStyle, redColorValue, greenColorValue, blueColorValue);
+        }
+    }
+
+    #endregion
+
+    #region helpers - ParseHex
+
+    private int ParseHex(string value, int defaultValue = 0) {
+        int testValue;
+        if (int.TryParse(value, System.Globalization.NumberStyles.HexNumber, null, out testValue)) {
+            return testValue;
+        } else {
+            return defaultValue;
         }
     }
 
