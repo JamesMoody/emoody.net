@@ -2,6 +2,7 @@
   "version": "1.0",
   "defaultProvider": "jsdelivr",
   "libraries": [
+
     {
       "library": "mainloop.js@1.0.4",
       "destination": "wwwroot/lib/mainloop.js/",
@@ -9,6 +10,51 @@
         "build/mainloop.min.js",
         "build/mainloop.min.js.map"
       ]
+    },
+
+    {
+      "library": "jquery@3.4.1",
+      "destination": "wwwroot/lib/jquery/",
+      "files": [
+        "dist/jquery.min.js",
+        "dist/jquery.min.map"
+      ]
+    },
+
+    {
+      "library": "bootstrap@4.4.1",
+      "destination": "wwwroot/lib/bootstrap/",
+      "files": [
+        "dist/css/bootstrap.min.css",
+        "dist/css/bootstrap.min.css.map",
+        "dist/js/bootstrap.bundle.min.js",
+        "dist/js/bootstrap.bundle.min.js.map"
+      ]
+    },
+
+    {
+      "library": "open-iconic@1.1.1",
+      "destination": "wwwroot/lib/open-iconic/",
+      "files": [
+        "font/css/open-iconic-bootstrap.min.css",
+        "font/fonts/open-iconic.eot",
+        "font/fonts/open-iconic.otf",
+        "font/fonts/open-iconic.svg",
+        "font/fonts/open-iconic.ttf",
+        "font/fonts/open-iconic.woff"
+      ]
+    },
+
+    {
+      "library": "bootstrap-select@1.13.12",
+      "destination": "wwwroot/lib/bootstrap-select/",
+      "files": [
+        "dist/css/bootstrap-select.min.css",
+        "dist/js/bootstrap-select.min.js",
+        "dist/js/bootstrap-select.min.js.map"
+      ]
     }
+
+
   ]
 }

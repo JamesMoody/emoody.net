@@ -21,6 +21,7 @@ body {
     color: white;
     background-color: transparent;
     min-width: 320px;
+    overflow-y: scroll;
 }
 
 app {
@@ -410,6 +411,12 @@ a.nav-link.active {
     height: 100%;
     min-height: 75px;
     border: solid 1px white;
+}
+
+
+.list-group-item-flowing {
+    background-color: #D2C6B4;
+    border: 0px;
 }
 
 

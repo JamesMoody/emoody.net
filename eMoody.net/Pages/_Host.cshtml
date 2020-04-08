@@ -12,8 +12,10 @@
     <meta name="viewport" content="width=device-width, initial-scale=1.0" />
     <title>eMoody.net</title>
     <base href="~/" />
-    <link rel="stylesheet" href="css/bootstrap/bootstrap.min.css" />
-    <link href="css/site.css" rel="stylesheet" />
+    <link rel="stylesheet" href="/lib/bootstrap/dist/css/bootstrap.min.css" />
+    <link rel="stylesheet" href="/lib/open-iconic/font/css/open-iconic-bootstrap.min.css" />
+    <link rel="stylesheet" href="/lib/bootstrap-select/dist/css/bootstrap-select.min.css" />
+    <link rel="stylesheet" href="/css/site.css" />
 </head>
 <body>
 
@@ -29,12 +31,16 @@
         </environment>
         <environment include="Development">
             An unhandled exception has occurred. See browser dev tools for details. <a href="/" class="reload">Reload</a>
-        </environment>        
+        </environment>
         <a class="dismiss">🗙</a>
     </div>
 
-    <script src="_framework/blazor.server.js"></script>
-    <script src="/lib/mainloop.js/build/mainloop.min.js"></script>
-    <script src="/js/starfield.js"></script>
+    <script type="text/javascript" src="_framework/blazor.server.js"></script>
+    <script type="text/javascript" src="/lib/jquery/dist/jquery.min.js"></script>
+    <script type="text/javascript" src="/lib/bootstrap/dist/js/bootstrap.bundle.min.js"></script>
+    <script type="text/javascript" src="/lib/bootstrap-select/dist/js/bootstrap-select.min.js"></script>
+    <script type="text/javascript" src="/lib/mainloop.js/build/mainloop.min.js"></script>
+    <script type="text/javascript" src="/js/starfield.js"></script>
+    <script type="text/javascript" src="/js/interops.js"></script>
 </body>
 </html>

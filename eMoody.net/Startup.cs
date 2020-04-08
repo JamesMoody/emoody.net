@@ -10,6 +10,10 @@ using Microsoft.Extensions.Configuration;
 using Microsoft.Extensions.DependencyInjection;
 using Microsoft.Extensions.Hosting;
 using Ganss.XSS;
+using eMoody.Infrastructure;
+using eMoody.Infrastructure.Configs;
+using eMoody.DAO;
+using eMoody.net.biz;
 
 namespace eMoody.net
 {
@@ -29,12 +33,10 @@ namespace eMoody.net
             services.AddRazorPages();
             services.AddServerSideBlazor();
 
-            // used in MarkdownViewer for markup/down conversion
-            services.AddScoped<IHtmlSanitizer, HtmlSanitizer>(p => {
-                var sanitizer = new Ganss.XSS.HtmlSanitizer(); // start with the defaults
-                sanitizer.AllowedTags.Add("p");                // add <p>
-                return sanitizer;
-            });
+            // config dependancy injections
+            services.AddScoped<IHtmlSanitizer, HtmlSanitizer>(p      => { return ServiceConfigs.Sanatizer(); });  // used in MarkdownViewer for markup/down conversion
+            services.AddSingleton<DataConfig>                ((cntx) => { return ServiceConfigs.DataConfig(); }); // DataAccess' config data
+            services.AddSingleton<iDataAccess, DataAccess>();                                                     // the data access object. note: DataConfig is injected into it. 
 
         }
 
