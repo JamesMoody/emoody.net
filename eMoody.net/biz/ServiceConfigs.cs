@@ -1,5 +1,5 @@
 ﻿using eMoody.Infrastructure.Configs;
-using Ganss.XSS;
+using Ganss.Xss;
 using System;
 using System.Collections.Generic;
 using System.IO;
@@ -14,7 +14,7 @@ namespace eMoody.net.biz
         #region Config the html/markdown sanatizer
 
         public static HtmlSanitizer Sanatizer() {
-            HtmlSanitizer sanitizer = new Ganss.XSS.HtmlSanitizer(); // start with the defaults
+            HtmlSanitizer sanitizer = new Ganss.Xss.HtmlSanitizer(); // start with the defaults
             sanitizer.AllowedTags.Add("p");                          // add <p>
             return sanitizer;
         }
