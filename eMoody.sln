@@ -9,6 +9,8 @@ Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "eMoody.DAO", "eMoody.DAO\eM
 EndProject
 Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "eMoody.Infrastructure", "eMoody.Infrastructure\eMoody.Infrastructure.csproj", "{9B70323F-ECD5-4480-B3A3-FD9F806C3AAB}"
 EndProject
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "eMoody.UnitTests", "eMoody.UnitTests\eMoody.UnitTests.csproj", "{6D30FA56-22B6-49C4-AFF5-3577C6E5B510}"
+EndProject
 Global
 	GlobalSection(SolutionConfigurationPlatforms) = preSolution
 		Debug|Any CPU = Debug|Any CPU
@@ -27,6 +29,10 @@ Global
 		{9B70323F-ECD5-4480-B3A3-FD9F806C3AAB}.Debug|Any CPU.Build.0 = Debug|Any CPU
 		{9B70323F-ECD5-4480-B3A3-FD9F806C3AAB}.Release|Any CPU.ActiveCfg = Release|Any CPU
 		{9B70323F-ECD5-4480-B3A3-FD9F806C3AAB}.Release|Any CPU.Build.0 = Release|Any CPU
+		{6D30FA56-22B6-49C4-AFF5-3577C6E5B510}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{6D30FA56-22B6-49C4-AFF5-3577C6E5B510}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{6D30FA56-22B6-49C4-AFF5-3577C6E5B510}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{6D30FA56-22B6-49C4-AFF5-3577C6E5B510}.Release|Any CPU.Build.0 = Release|Any CPU
 	EndGlobalSection
 	GlobalSection(SolutionProperties) = preSolution
 		HideSolutionNode = FALSE
