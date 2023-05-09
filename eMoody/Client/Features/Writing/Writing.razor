@@ -1,0 +1,83 @@
+﻿@page "/writing"
+@using eMoody.Infrastructure;
+@using eMoody.Infrastructure.DataModels;
+@using eMoody.Client.Shared.Components; 
+@inject iDataAccess dao
+
+        <div class="row">
+
+            <div class="col-md-3 col-lg-2" style="margin-bottom: 10px;">
+                <div class="card card-color">
+                    <h5 class="card-title">Musings</h5>
+                    <div class="card-body">
+                        <FancyList TemplateType="Article" Items="@Articles" onOptionClicked="showArticleDetail">
+                            <Option>
+                                @context.Title
+                            </Option>
+                        </FancyList>
+                    </div>
+                </div>
+            </div>
+
+            @if (hasArticleSelected)
+            {
+                <div class="col-md-9 col-lg-10">
+                    <div class="card card-color">
+                        <h5 class="card-title">"@selectedArticle.Title"</h5>
+                        <div class="card-body">
+                            <ArticleDetail @ref="articleDetail"
+                                            SelectedArticle="selectedArticle">
+                            </ArticleDetail>
+                        </div>
+                    </div>
+                </div>
+            }
+
+        </div>
+
+
+@code {
+
+        #region locals et al
+
+        protected IReadOnlyList<Article> Articles        = new Article[] {};
+        protected Article                selectedArticle = null;
+        protected ArticleDetail          articleDetail   = null;
+
+        #endregion
+
+        #region overrides - OnAfterRender
+
+        // protected override void OnInitialized()
+        protected async override void OnAfterRender(bool firstRender)
+        {
+            if (firstRender) {
+                using (var db = dao.Writing) {
+                    Articles = (await db.listArticlesAsync()).ToArray();
+                    StateHasChanged();
+                }
+            }
+        }
+
+        #endregion
+
+        #region properties - hasArticleSelected
+
+        protected bool hasArticleSelected {
+            get {
+                return (selectedArticle != null);
+            }
+        }
+
+        #endregion
+
+        #region event targets - showArticleDetail
+
+        protected void showArticleDetail(Article item) {
+            selectedArticle = item;
+        }
+
+
+        #endregion
+
+}

@@ -1,0 +1,148 @@
+﻿@page "/kjv"
+@using Microsoft.JSInterop
+@using eMoody.Infrastructure;
+@using eMoody.Infrastructure.DataModels;
+@using eMoody.Client.Shared.Components;
+@using eMoody.Client.BizObjects;
+
+@inject IJSRuntime  JSRuntime
+@inject iDataAccess dao
+
+<div class="card card-color">
+    <h5 class="card-title">KJV Bible</h5>
+    <div class="card-body">
+
+        <div class="input-group bump-bottom">
+
+            <select id="selBibleBook" cclass="selectpicker interop-select-picker" data-live-search="true" @bind="@currentBookId">
+                @foreach (BibleGenre genre in genres)
+                {
+                    <optgroup label="@genre.Name">
+                        @foreach (BibleBook book in books.Where(p => p.GenreId == genre.GenreId))
+                        {
+                            <option value="@book.BookId">@book.Name</option>
+                        }
+                    </optgroup>
+                }
+
+
+            </select>
+
+            <input type="number" @bind-value="currentChapter" @bind-value:event="oninput" style="width: 4em;" min="1" max="@(currentBook?.numChapters ?? 1)" maxlength="3" />
+
+            <div class="input-group-append">
+                <span class="input-group-text text-center" style="width: 5em;">: 1-@(currentVerses?.Count ?? 0)</span>
+            </div>
+
+        </div>
+
+
+
+            @if (currentVerses != null && currentVerses.Count > 0)
+            {
+                <div class="list-group">
+                    @foreach (BibleVerse verse in currentVerses)
+                    {
+                        <div class="list-group-item list-group-item-flowing">
+                            <div class="d-flex align-items-start flex-row">
+                                <div class="p-2">@verse.Verse</div>
+                                <div class="p-2">@verse.Text</div>
+                            </div>
+                        </div>
+                    }
+                </div>
+
+            } else {
+                <div class="list-group">
+                    <div class="list-group-item">
+                        <p>Missing?! Please select a different chapter.</p>
+                    </div>
+                </div>
+            }
+
+        </div>
+    </div>
+
+
+@code {
+
+    #region locals et al
+
+    protected IReadOnlyList<BibleBook>  books         = new BibleBook[]  { };
+    protected IReadOnlyList<BibleGenre> genres        = new BibleGenre[] { };
+    protected IReadOnlyList<BibleVerse> currentVerses = new BibleVerse[] { };
+    public    BibleBook                 currentBook   = null;
+
+    private int _currentChapter = 1;
+    public  int currentChapter {
+        get {
+            return _currentChapter;
+        }
+        set {
+            _currentChapter = value;
+            populateVerses(); // need a little bit extra processing if this value changes
+        }
+    }
+
+    private int _currentBookId  = 1;
+    public  int  currentBookId {
+        get {
+            return _currentBookId;
+        }
+        set {
+            _currentBookId = value;
+            currentBook    = books.Where(p => p.BookId == _currentBookId).FirstOrDefault();
+            currentChapter = 1; // reset chapter; this will end up calling populateVerses();
+        }
+    }
+
+    #endregion
+
+    #region overrides - OnInitialized
+
+    // // protected override void OnInitialized()
+    // protected async override void OnAfterRender(bool firstRender) {
+    // 
+    // }
+
+    #endregion
+    #region overrides - OnAfterRenderAsync (JS Interops)
+
+    protected override async Task OnAfterRenderAsync(bool firstRender) {
+        if (firstRender) {
+
+            // grab the data
+            using (var db = dao.Bible) {
+                books  = (await db.ListBooksAsync() ).ToArray();
+                genres = (await db.ListGenresAsync()).ToArray();
+            }
+
+            // set defaults
+            currentBook = books.Where(p => p.BookId == currentBookId).FirstOrDefault();
+            populateVerses();
+
+            // // use a JS component to render a fancy select list
+            // await JSRuntime.InvokeVoidAsync( "blazorInterops.initBootstrapSelects", ".interop-select-picker");
+        }
+
+    }
+
+    #endregion
+
+    #region page needs - populateVerses
+
+    public async void populateVerses() {
+
+        if (currentBookId > 0 && currentChapter > 0) {  // has a book and chapter been selected?
+            using (var db = dao.Bible) {
+                currentVerses = (await db.GetVersesAsync(currentBookId, currentChapter) ).ToArray();
+            }
+
+            StateHasChanged();
+        }
+    }
+
+    #endregion
+
+
+}

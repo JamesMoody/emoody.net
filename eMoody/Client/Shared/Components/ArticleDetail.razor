@@ -1,0 +1,15 @@
+﻿@using eMoody.Infrastructure.DataModels;
+
+<MarkdownViewer Content="@SelectedArticle.Content"></MarkdownViewer>
+<p>- @SelectedArticle.Author</p>
+
+@code {
+
+    #region params - selectedArticle
+
+    [Parameter]
+    public Article SelectedArticle { get; set; } = null;
+
+    #endregion
+
+}
