@@ -13,8 +13,7 @@ namespace eMoody.Client.BizObjects
 
         #region Config the html/markdown sanatizer
 
-        public static HtmlSanitizer Sanatizer()
-        {
+        public static HtmlSanitizer Sanatizer() {
             HtmlSanitizer sanitizer = new Ganss.Xss.HtmlSanitizer(); // start with the defaults
             sanitizer.AllowedTags.Add("p");                          // add <p>
             return sanitizer;
@@ -24,8 +23,7 @@ namespace eMoody.Client.BizObjects
 
         #region Config the httpclient to "go back to the shadow from whence you came"
 
-        public static HttpClient PhoneHome(WebAssemblyHostBuilder builder)
-        {
+        public static HttpClient PhoneHome(WebAssemblyHostBuilder builder) {
             return new HttpClient { 
                 BaseAddress = new Uri(builder.HostEnvironment.BaseAddress) 
             };

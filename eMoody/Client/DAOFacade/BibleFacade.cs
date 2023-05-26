@@ -17,16 +17,14 @@ namespace eMoody.Client.DAOFacade
         #endregion
         #region init
 
-        public BibleFacade(HttpClient httpDI)
-        {
+        public BibleFacade(HttpClient httpDI) {
             http = httpDI;
         }
 
         #endregion
         #region Dispose
 
-        public void Dispose()
-        {
+        public void Dispose() {
             // no-op
         }
 

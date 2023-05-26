@@ -48,9 +48,7 @@
 
         #region overrides - OnAfterRender
 
-        // protected override void OnInitialized()
-        protected async override void OnAfterRender(bool firstRender)
-        {
+        protected async override void OnAfterRender(bool firstRender) {
             if (firstRender) {
                 using (var db = dao.Writing) {
                     Articles = (await db.listArticlesAsync()).ToArray();

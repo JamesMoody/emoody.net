@@ -26,7 +26,6 @@ body {
 }
 
 app {
-    /*   position: relative; */
     display: flex;
     flex-direction: column;
 }
@@ -211,10 +210,6 @@ a.nav-link, a.nav-link:visited, a.nav-link:active {
 .menuDropDown {
     background-color: #1a1a1a;
     color: white;
-    /* background-color: white; */
-    /* background-color: antiquewhite; */
-    /* background-color: rgb(191, 191, 191); */
-    /* background: rgba(255, 255, 255, 0.10); */
 }
 
 
@@ -429,35 +424,7 @@ a.nav-link, a.nav-link:visited, a.nav-link:active {
     margin-bottom: 10px;
 }
 
-/*
-/ * Small devices, 576px and up * /
-@media (min-width: 576px) {
-    .color-range-alignments {
-        margin-top: 15px;
-    }
-}
 
-/ * Medium devices, 768px and up * /
-@media (min-width: 768px) {
-    .color-range-alignments {
-        margin-top: 15px;
-    }
-}
-
-/ * Large devices, 992px and up * /
-@media (min-width: 992px) {
-    .color-range-alignments {
-        margin-top: 15px;
-    }
-}
-
-/ * Extra large devices, 1200px and up * /
-@media (min-width: 1200px) {
-    .color-range-alignments {
-        margin-top: 15px;
-    }
-}
-*/
 
 
 /*******************

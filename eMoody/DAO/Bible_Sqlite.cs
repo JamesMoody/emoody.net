@@ -16,7 +16,6 @@ namespace eMoody.DAO
         #region locals and such
 
         private SQLiteConnection _conn = null;
-        //private DataConfig       _config = null;
         private BibleConfig _dbConfig = null;
 
         #endregion

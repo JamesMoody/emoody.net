@@ -98,14 +98,6 @@
 
     #endregion
 
-    #region overrides - OnInitialized
-
-    // // protected override void OnInitialized()
-    // protected async override void OnAfterRender(bool firstRender) {
-    // 
-    // }
-
-    #endregion
     #region overrides - OnAfterRenderAsync (JS Interops)
 
     protected override async Task OnAfterRenderAsync(bool firstRender) {
@@ -120,9 +112,6 @@
             // set defaults
             currentBook = books.Where(p => p.BookId == currentBookId).FirstOrDefault();
             populateVerses();
-
-            // // use a JS component to render a fancy select list
-            // await JSRuntime.InvokeVoidAsync( "blazorInterops.initBootstrapSelects", ".interop-select-picker");
         }
 
     }

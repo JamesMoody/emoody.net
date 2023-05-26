@@ -18,16 +18,14 @@ namespace eMoody.Client.DAOFacade
         #endregion
         #region init
 
-        public WritingFacade(HttpClient httpDI)
-        {
+        public WritingFacade(HttpClient httpDI) {
             http = httpDI;
         }
 
         #endregion
         #region Dispose
 
-        public void Dispose()
-        {
+        public void Dispose() {
             // no-op
         }
 

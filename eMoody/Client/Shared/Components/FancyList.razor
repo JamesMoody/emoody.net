@@ -19,13 +19,11 @@
 
     [Parameter]
     public EventCallback<TemplateType> onOptionClicked { get; set; }
-    //public EventCallback<string> onOptionClicked { get; set; }
 
 
 
 
-    protected async Task optionClicked(TemplateType item)
-    {
+    protected async Task optionClicked(TemplateType item) {
         await onOptionClicked.InvokeAsync(item);
     }
 }
