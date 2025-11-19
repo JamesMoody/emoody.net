@@ -1,8 +1,5 @@
-﻿using System;
-using System.Collections.Generic;
-using System.Text;
 
-namespace eMoody.Infrastructure.DataModels
+namespace eMoody.Shared.Models
 {
     public class BibleGenre
     {

@@ -1,11 +1,6 @@
-﻿using eMoody.Infrastructure.DataModels;
-using System;
-using System.Collections.Generic;
-using System.Linq;
-using System.Text;
-using System.Threading.Tasks;
+using eMoody.Shared.Models;
 
-namespace eMoody.Infrastructure
+namespace eMoody.Shared.Interfaces
 {
     public interface iBible : IDisposable
     {

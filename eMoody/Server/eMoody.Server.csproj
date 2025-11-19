@@ -17,9 +17,8 @@
 
   <ItemGroup>
     <ProjectReference Include="..\Client\eMoody.Client.csproj" />
-    <ProjectReference Include="..\Config\eMoody.Config.csproj" />
-    <ProjectReference Include="..\DAO\eMoody.DAO.csproj" />
-    <ProjectReference Include="..\Infrastructure\eMoody.Infrastructure.csproj" />
+    <ProjectReference Include="..\Shared\eMoody.Shared.csproj" />
+    <ProjectReference Include="..\Data\eMoody.Data.csproj" />
   </ItemGroup>
 
   <ItemGroup>
@@ -27,6 +26,5 @@
       <CopyToOutputDirectory>Always</CopyToOutputDirectory>
     </None>
   </ItemGroup>
-
 
 </Project>

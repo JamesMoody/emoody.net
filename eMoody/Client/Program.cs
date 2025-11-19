@@ -1,7 +1,6 @@
-using eMoody.Client;
 using eMoody.Client.BizObjects;
 using eMoody.Client.DAOFacade;
-using eMoody.Infrastructure;
+using eMoody.Shared.Interfaces;
 using Ganss.Xss;
 using Microsoft.AspNetCore.Components.Web;
 using Microsoft.AspNetCore.Components.WebAssembly.Hosting;

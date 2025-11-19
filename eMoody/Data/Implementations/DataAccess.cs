@@ -1,19 +1,13 @@
-﻿using eMoody.Config;
-using eMoody.Infrastructure;
-using System;
-using System.Collections.Generic;
-using System.Linq;
-using System.Text;
-using System.Threading.Tasks;
+using eMoody.Data.Configuration;
+using eMoody.Shared.Interfaces;
 
-namespace eMoody.DAO
+namespace eMoody.Data.Implementations
 {
     public class DataAccess : iDataAccess
     {
 
         #region locals and such
 
-        // private DataConfig _config = null;
         private BibleConfig _bibleConfig = null;
 
         #endregion

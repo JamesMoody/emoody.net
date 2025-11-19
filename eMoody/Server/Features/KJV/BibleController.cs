@@ -2,8 +2,8 @@
 using System.Collections.Generic;
 using System.Linq;
 using System.Threading.Tasks;
-using eMoody.Infrastructure;
-using eMoody.Infrastructure.DataModels;
+using eMoody.Shared.Interfaces;
+using eMoody.Shared.Models;
 using Microsoft.AspNetCore.Http;
 using Microsoft.AspNetCore.Mvc;
 using Microsoft.Extensions.Logging;

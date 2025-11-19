@@ -1,15 +1,10 @@
-﻿using Dapper;
-using eMoody.Config;
-using eMoody.Infrastructure;
-using eMoody.Infrastructure.DataModels;
-using System;
-using System.Collections.Generic;
+using Dapper;
+using eMoody.Data.Configuration;
+using eMoody.Shared.Interfaces;
+using eMoody.Shared.Models;
 using System.Data.SQLite;
-using System.Linq;
-using System.Text;
-using System.Threading.Tasks;
 
-namespace eMoody.DAO
+namespace eMoody.Data.Implementations
 {
     public class Bible_Sqlite : iBible
     {
@@ -21,7 +16,6 @@ namespace eMoody.DAO
         #endregion
         #region init
 
-        //public Bible_Sqlite(DataConfig diConfig) {
         public Bible_Sqlite(BibleConfig dbConfigDI) {
             _dbConfig = dbConfigDI;
             _conn = new SQLiteConnection(_dbConfig.BibleConnString);

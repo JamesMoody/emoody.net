@@ -1,11 +1,6 @@
-﻿using eMoody.Infrastructure.DataModels;
-using System;
-using System.Collections.Generic;
-using System.Linq;
-using System.Text;
-using System.Threading.Tasks;
+using eMoody.Shared.Models;
 
-namespace eMoody.DAO
+namespace eMoody.Data.Implementations
 {
     public static class WritingArticles
     {
@@ -30,7 +25,7 @@ namespace eMoody.DAO
                             "    Ragged lines so confuse me;\n" +
                             "    sounding as clear as scratched CDs.\n" +
                             "\n" +
-                            "    Cultured caste is so cliché;\n" +
+                            "    Cultured caste is so clich�;\n" +
                             "    latte drinking, only on doomsday.\n" +
                             "\n" +
                             "    Who dreamt this hideous torture?\n" +

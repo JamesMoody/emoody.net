@@ -1,10 +1,6 @@
-﻿using eMoody.Infrastructure;
-using eMoody.Infrastructure.DataModels;
-using System;
-using System.Collections.Generic;
-using System.Net.Http;
+﻿using eMoody.Shared.Interfaces;
+using eMoody.Shared.Models;
 using System.Net.Http.Json;
-using System.Threading.Tasks;
 
 namespace eMoody.Client.DAOFacade
 {

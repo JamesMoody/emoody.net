@@ -1,8 +1,5 @@
-﻿using System;
-using System.Collections.Generic;
-using System.Text;
 
-namespace eMoody.Infrastructure.DataModels
+namespace eMoody.Shared.Models
 {
     public class BibleVersion
     {
@@ -16,6 +13,5 @@ namespace eMoody.Infrastructure.DataModels
         public string Publisher     { get; set; }
         public string Copyright     { get; set; }
         public string CopyrightInfo { get; set; }
-        
     }
 }

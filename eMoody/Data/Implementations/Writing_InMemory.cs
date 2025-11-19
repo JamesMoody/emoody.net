@@ -1,15 +1,11 @@
-﻿using eMoody.Infrastructure;
-using eMoody.Infrastructure.DataModels;
-using System;
-using System.Collections.Generic;
-using System.Linq;
-using System.Text;
-using System.Threading.Tasks;
+using eMoody.Shared.Interfaces;
+using eMoody.Shared.Models;
 
-namespace eMoody.DAO
+namespace eMoody.Data.Implementations
 {
     public class Writing_InMemory : iWriting
     {
+
         #region locals and such...
 
         private Article[] Articles = {

@@ -1,9 +1,4 @@
-﻿using eMoody.Infrastructure;
-using System;
-using System.Collections.Generic;
-using System.Linq;
-using System.Net.Http;
-using System.Threading.Tasks;
+﻿using eMoody.Shared.Interfaces;
 
 namespace eMoody.Client.DAOFacade
 {

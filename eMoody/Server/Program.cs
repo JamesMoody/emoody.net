@@ -1,11 +1,7 @@
-using Microsoft.AspNetCore.ResponseCompression;
-using eMoody.Server.Biz;
-using Microsoft.Extensions.Configuration;
-using eMoody.Config;
-using eMoody.Infrastructure;
-using eMoody.DAO;
-using Microsoft.Extensions.Hosting;
-
+using eMoody.Data.Configuration;
+using eMoody.Shared.Interfaces;
+using eMoody.Data.Implementations;
+using eMoody.Data.Extensions;
 
 namespace eMoody
 {
@@ -22,7 +18,7 @@ namespace eMoody
 
             // add services
             builder.Services.AddSingleton<BibleConfig>(p => builder.Configuration.GetSection(BibleConfig.ConfigKey).Get<BibleConfig>());
-            builder.Services.AddTransient<iDataAccess, DataAccess>();  // the data access object. note: DataConfig is injected into it. 
+            builder.Services.AddTransient<iDataAccess, DataAccess>();  // the data access object. note: BibleConfig is injected into it. 
 
             var app = builder.Build();
 
