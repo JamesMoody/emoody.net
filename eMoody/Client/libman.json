@@ -13,7 +13,7 @@
     },
 
     {
-      "library": "jquery@3.4.1",
+      "library": "jquery@3.7.1",
       "destination": "wwwroot/lib/jquery/",
       "files": [
         "dist/jquery.min.js",
@@ -22,7 +22,7 @@
     },
 
     {
-      "library": "bootstrap@4.4.1",
+      "library": "bootstrap@4.6.2",
       "destination": "wwwroot/lib/bootstrap/",
       "files": [
         "dist/css/bootstrap.min.css",
@@ -46,7 +46,7 @@
     },
 
     {
-      "library": "bootstrap-select@1.13.12",
+      "library": "bootstrap-select@1.13.18",
       "destination": "wwwroot/lib/bootstrap-select/",
       "files": [
         "dist/css/bootstrap-select.min.css",
