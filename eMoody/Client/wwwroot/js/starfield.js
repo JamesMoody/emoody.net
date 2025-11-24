@@ -10,7 +10,7 @@ function startStarfield(targetElementId, numOfStarts) {
     // note: this could be encapsulated inside the starfield class via MainLoop.createInstance() using MultiMain @ https://gist.github.com/IceCreamYou/6b16d8350bc4125a08c76b499e0d4c59
     // chose highly visible, single loop cuz hiding any form of multi-tasking is a bad idea.
     MainLoop
-        .setMaxAllowedFPS(33) // no need to kill the CPU for a backgroun effect
+        .setMaxAllowedFPS(33) // no need to kill the CPU for a background effect
         .setUpdate( function () { starField.move(); } ) // the update event moves the stars        
         .setDraw(   function () { starField.draw(); } ) // the draw event (naturally) draws the stars
         .start();
