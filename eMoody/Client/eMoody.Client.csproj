@@ -22,4 +22,44 @@
     <ProjectReference Include="..\Shared\eMoody.Shared.csproj" />
   </ItemGroup>
 
+  <!-- Fixed target to inject cache busters -->
+  <Target Name="InjectCacheBusters" BeforeTargets="Build">
+    <PropertyGroup>
+      <CacheBusterVersion>$([System.DateTime]::Now.ToString('yyyyMMddHHmmss'))</CacheBusterVersion>
+      <IndexHtmlTemplate>wwwroot\index.template.html</IndexHtmlTemplate>
+      <IndexHtmlPath>wwwroot\index.html</IndexHtmlPath>
+    </PropertyGroup>
+
+    <!-- Read the template content -->
+    <ReadLinesFromFile File="$(IndexHtmlTemplate)">
+      <Output TaskParameter="Lines" ItemName="TemplateLines"/>
+    </ReadLinesFromFile>
+
+    <!-- Convert to single string and apply replacements -->
+    <PropertyGroup>
+      <TemplateContent>@(TemplateLines, '%0D%0A')</TemplateContent>
+      <UpdatedContent>
+        $(TemplateContent
+        .Replace('/lib/bootstrap/dist/css/bootstrap.min.css'              , '/lib/bootstrap/dist/css/bootstrap.min.css?v=$(CacheBusterVersion)')
+        .Replace('/lib/open-iconic/font/css/open-iconic-bootstrap.min.css', '/lib/open-iconic/font/css/open-iconic-bootstrap.min.css?v=$(CacheBusterVersion)')
+        .Replace('/lib/bootstrap-select/dist/css/bootstrap-select.min.css', '/lib/bootstrap-select/dist/css/bootstrap-select.min.css?v=$(CacheBusterVersion)')
+        .Replace('/css/app.css'                                           , '/css/app.css?v=$(CacheBusterVersion)')
+        .Replace('_framework/blazor.webassembly.js'                       , '_framework/blazor.webassembly.js?v=$(CacheBusterVersion)')
+        .Replace('/lib/jquery/dist/jquery.min.js'                         , '/lib/jquery/dist/jquery.min.js?v=$(CacheBusterVersion)')
+        .Replace('/lib/bootstrap/dist/js/bootstrap.bundle.min.js'         , '/lib/bootstrap/dist/js/bootstrap.bundle.min.js?v=$(CacheBusterVersion)')
+        .Replace('/lib/mainloop.js/build/mainloop.min.js'                 , '/lib/mainloop.js/build/mainloop.min.js?v=$(CacheBusterVersion)')
+        .Replace('/js/starfield.js'                                       , '/js/starfield.js?v=$(CacheBusterVersion)')
+        .Replace('/js/interops.js'                                        , '/js/interops.js?v=$(CacheBusterVersion)'))
+      </UpdatedContent>
+      <!-- Decode line breaks -->
+      <FinalContent>$(UpdatedContent.Replace('%0D%0A', '%0D%0A'))</FinalContent>
+    </PropertyGroup>
+
+    <!-- Write the updated content -->
+    <WriteLinesToFile File="$(IndexHtmlPath)" Lines="$(FinalContent)" Overwrite="true" />
+
+    <Message Text="Updated $(IndexHtmlPath) with cache buster: $(CacheBusterVersion)" Importance="high" />
+  </Target>
+
+
 </Project>
