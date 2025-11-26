@@ -1,7 +1,7 @@
 # See https://aka.ms/customizecontainer to learn how to customize your debug container and how Visual Studio uses this Dockerfile to build your images for faster debugging.
 
 # This stage is used when running from VS in fast mode (Default for Debug configuration)
-FROM mcr.microsoft.com/dotnet/aspnet:6.0 AS base
+FROM mcr.microsoft.com/dotnet/aspnet:6.0-bullseye-slim AS base
 WORKDIR /app
 EXPOSE 80
 EXPOSE 443
@@ -11,7 +11,7 @@ RUN addgroup --system --gid 1001 blazorgroup && \
     adduser --system --uid 1001 --gid 1001 blazoruser
 
 # This stage is used to build the service project
-FROM mcr.microsoft.com/dotnet/sdk:6.0 AS build
+FROM mcr.microsoft.com/dotnet/sdk:6.0-bullseye-slim AS build
 ARG BUILD_CONFIGURATION=Release
 WORKDIR /src
 
@@ -22,21 +22,20 @@ COPY ["eMoody/Shared/eMoody.Shared.csproj", "eMoody/Shared/"]
 COPY ["eMoody/Data/eMoody.Data.csproj", "eMoody/Data/"]
 
 # Restore packages in separate layer for better caching
-RUN dotnet restore "eMoody/Server/eMoody.Server.csproj"
+RUN dotnet restore "./eMoody/Server/eMoody.Server.csproj"
 
 # Copy source code
 COPY . .
 WORKDIR "/src/eMoody/Server"
 
 # Build with optimizations
-RUN dotnet build "eMoody.Server.csproj" -c $BUILD_CONFIGURATION -o /app/build \
-    --no-restore --verbosity minimal
+#RUN dotnet build "./eMoody.Server.csproj" -c $BUILD_CONFIGURATION -o /app/build --no-restore --verbosity minimal
+RUN dotnet build "./eMoody.Server.csproj" -c $BUILD_CONFIGURATION -o /app/build --verbosity minimal
 
 # This stage is used to publish the service project to be copied to the final stage
 FROM build AS publish
 ARG BUILD_CONFIGURATION=Release
-RUN dotnet publish "eMoody.Server.csproj" -c $BUILD_CONFIGURATION -o /app/publish \
-    --no-build --no-restore \
+RUN dotnet publish "./eMoody.Server.csproj" -c $BUILD_CONFIGURATION -o /app/publish \
     /p:UseAppHost=false \
     /p:PublishTrimmed=false \
     /p:PublishSingleFile=false \
