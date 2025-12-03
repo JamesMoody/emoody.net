@@ -3,8 +3,8 @@
 # This stage is used when running from VS in fast mode (Default for Debug configuration)
 FROM mcr.microsoft.com/dotnet/aspnet:6.0-bullseye-slim AS base
 WORKDIR /app
+# Only expose HTTP port - HTTPS handled by reverse proxy
 EXPOSE 80
-EXPOSE 443
 
 # Create non-root user for security
 RUN addgroup --system --gid 1001 blazorgroup && \
@@ -29,7 +29,6 @@ COPY . .
 WORKDIR "/src/eMoody/Server"
 
 # Build with optimizations
-#RUN dotnet build "./eMoody.Server.csproj" -c $BUILD_CONFIGURATION -o /app/build --no-restore --verbosity minimal
 RUN dotnet build "./eMoody.Server.csproj" -c $BUILD_CONFIGURATION -o /app/build --verbosity minimal
 
 # This stage is used to publish the service project to be copied to the final stage
@@ -53,16 +52,22 @@ RUN apt-get update && apt-get install -y curl && rm -rf /var/lib/apt/lists/*
 # Copy published files with correct ownership
 COPY --from=publish --chown=blazoruser:blazorgroup /app/publish .
 
-# Set environment variables for production
+# Set environment variables optimized for reverse proxy
 ENV ASPNETCORE_ENVIRONMENT=Production
-ENV ASPNETCORE_URLS=http://+:80;https://+:443
+# Only listen on HTTP - reverse proxy handles HTTPS
+ENV ASPNETCORE_URLS=http://+:80
+# Enable forwarded headers for proper client IP and protocol detection
+ENV ASPNETCORE_FORWARDEDHEADERS_ENABLED=true
+# Disable HTTPS redirection - handled by reverse proxy
+ENV ASPNETCORE_HTTPS_REDIRECT_ENABLED=false
+# Keep HTTPS port for URL generation
 ENV ASPNETCORE_HTTPS_PORT=443
 
 # Switch to non-root user
 USER blazoruser
 
-# Add health check - only returns HTTP status codes
-HEALTHCHECK --interval=30s --timeout=3s --start-period=5s --retries=3 \
+# Health check optimized for reverse proxy
+HEALTHCHECK --interval=30s --timeout=10s --start-period=5s --retries=3 \
     CMD curl -f http://localhost:80/health || exit 1
 
 ENTRYPOINT ["dotnet", "eMoody.Server.dll"]
