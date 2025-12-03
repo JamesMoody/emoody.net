@@ -22,7 +22,7 @@
     },
 
     {
-      "library": "bootstrap@4.6.2",
+      "library": "bootstrap@5.3.8",
       "destination": "wwwroot/lib/bootstrap/",
       "files": [
         "dist/css/bootstrap.min.css",

@@ -5,7 +5,7 @@ namespace eMoody.Data.Configuration
 
         public const string ConfigKey = "bibleConfig";
 
-        public string ConnStringFormat { get; set; } = "Data Source={0};Version=3;Read Only=True;";
+        public string ConnStringFormat { get; set; } = "Data Source={0};Mode=ReadOnly;"; // consider: Mode=Memory 
         public string AssetsDirectory  { get; set; } = "assets";
         public string DbFile           { get; set; } = "bible-sqlite.db";
 

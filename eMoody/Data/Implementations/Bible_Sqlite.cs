@@ -2,7 +2,7 @@ using Dapper;
 using eMoody.Data.Configuration;
 using eMoody.Shared.Interfaces;
 using eMoody.Shared.Models;
-using System.Data.SQLite;
+using Microsoft.Data.Sqlite;
 
 namespace eMoody.Data.Implementations
 {
@@ -10,7 +10,7 @@ namespace eMoody.Data.Implementations
     {
         #region locals and such
 
-        private SQLiteConnection _conn = null;
+        private SqliteConnection _conn = null;
         private BibleConfig _dbConfig = null;
 
         #endregion
@@ -18,7 +18,7 @@ namespace eMoody.Data.Implementations
 
         public Bible_Sqlite(BibleConfig dbConfigDI) {
             _dbConfig = dbConfigDI;
-            _conn = new SQLiteConnection(_dbConfig.BibleConnString);
+            _conn = new SqliteConnection(_dbConfig.BibleConnString);
             _conn.Open();
         }
 
